@@ -1,0 +1,106 @@
+﻿@model LAB2.Models.Student
+
+@{
+    ViewData["Title"] = "Create Student";
+    // Layout = "~/Views/Shared/MyLayout.cshtml";
+}
+
+<div class="container mt-4">
+    <h2>Thêm Sinh viên mới</h2>
+
+    <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+    <form asp-controller="Student" asp-action="Create" method="post" class="mt-3">
+
+        <div style="margin-top:7px" class="form-group row">
+            <label asp-for="Name" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="Name" class="form-control" placeholder="Họ tên (4-100 ký tự)">
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div style="margin-top:7px" class="form-group row">
+            <label asp-for="Email" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="Email" class="form-control" placeholder="Email (đuôi gmail.com)">
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div style="margin-top:7px" class="form-group row">
+            <label asp-for="Password" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="Password" type="password" class="form-control" placeholder="Password (>=8 ký tự, có hoa, thường, số, kí tự đặc biệt)">
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div style="margin-top:7px" class="form-group row">
+            <label asp-for="Branch" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <select asp-for="Branch" class="form-control" asp-items="Html.GetEnumSelectList<Branch>()">
+                    <option value="">-- Chọn ngành học --</option>
+                </select>
+                <span asp-validation-for="Branch" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div style="margin-top:7px" class="form-group row">
+            <label asp-for="IsRegular" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input type="checkbox" asp-for="IsRegular"> Chính quy
+                <span asp-validation-for="IsRegular" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div style="margin-top:7px" class="form-group row">
+            <label asp-for="DateOfBorth" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="DateOfBorth" class="form-control">
+                <span asp-validation-for="DateOfBorth" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div style="margin-top:7px" class="form-group row">
+            <label asp-for="Gender" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                @foreach (var gender in Enum.GetValues(typeof(Gender)))
+                {
+                    <label class="radio-inline mr-3">
+                        <input type="radio" asp-for="Gender" value="@gender" id="Gender@(gender)" /> @gender
+                    </label>
+                }
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div style="margin-top:7px" class="form-group row">
+            <label asp-for="Address" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <textarea asp-for="Address" class="form-control" placeholder="Địa chỉ"></textarea>
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div style="margin-top:7px" class="form-group row">
+            <label asp-for="Score" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="Score" class="form-control" placeholder="Điểm số (0.0 - 10.0)">
+                <span asp-validation-for="Score" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div style="margin-top: 10px" class="form-group row">
+            <div class="col-sm-10 offset-sm-2">
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

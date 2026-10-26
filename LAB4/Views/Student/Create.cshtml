@@ -1,0 +1,98 @@
+﻿@model LAB2.Models.Student
+
+@{
+    ViewData["Title"] = "Thêm mới sinh viên";
+}
+
+<div class="container mt-4">
+    <h2>Thêm mới Sinh viên</h2>
+    <form asp-controller="Student" asp-action="Create" method="post" enctype="multipart/form-data" class="mt-3">
+
+        <div class="form-group row mb-3">
+            <label asp-for="Name" class="col-sm-2 col-form-label font-weight-bold"></label>
+            <div class="col-sm-10">
+                <input asp-for="Name" class="form-control" placeholder="Nhập họ tên sinh viên...">
+            </div>
+        </div>
+
+        <div class="form-group row mb-3">
+            <label asp-for="Email" class="col-sm-2 col-form-label font-weight-bold"></label>
+            <div class="col-sm-10">
+                <input asp-for="Email" class="form-control" placeholder="Nhập email...">
+            </div>
+        </div>
+
+        <div class="form-group row mb-3">
+            <label asp-for="Password" class="col-sm-2 col-form-label font-weight-bold"></label>
+            <div class="col-sm-10">
+                <input asp-for="Password" type="password" class="form-control" placeholder="Nhập mật khẩu...">
+            </div>
+        </div>
+
+        <div class="form-group row mb-3">
+            <label asp-for="Branch" class="col-sm-2 col-form-label font-weight-bold"></label>
+            <div class="col-sm-10">
+                <select asp-for="Branch" class="form-control" asp-items="Html.GetEnumSelectList<Branch>()">
+                    <option value="">-- Chọn ngành học --</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row mb-3">
+            <label asp-for="IsRegular" class="col-sm-2 col-form-label font-weight-bold">Hệ đào tạo</label>
+            <div class="col-sm-10 d-flex align-items-center">
+                <div class="form-check">
+                    <input asp-for="IsRegular" class="form-check-input" type="checkbox">
+                    <label class="form-check-label" for="IsRegular">Hệ chính quy</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row mb-3">
+            <label asp-for="DateOfBorth" class="col-sm-2 col-form-label font-weight-bold">Ngày sinh</label>
+            <div class="col-sm-10">
+                <input asp-for="DateOfBorth" type="date" class="form-control">
+            </div>
+        </div>
+
+        <div class="form-group row mb-3">
+            <label asp-for="Gender" class="col-sm-2 col-form-label font-weight-bold"></label>
+            <div class="col-sm-10">
+                @foreach (var gender in ViewBag.AllGenders)
+                {
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" asp-for="Gender" value="@gender" id="Gender_@gender" />
+                        <label class="form-check-label" for="Gender_@gender">@gender</label>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="form-group row mb-3">
+            <label asp-for="Address" class="col-sm-2 col-form-label font-weight-bold">Địa chỉ</label>
+            <div class="col-sm-10">
+                <textarea asp-for="Address" class="form-control" rows="3" placeholder="Nhập địa chỉ..."></textarea>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-10 offset-sm-2">
+                <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Tạo mới</button>
+                <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+            </div>
+        </div>
+        <div class="form-group row mb-3">
+            <label asp-for="AvatarFile" class="col-sm-2 col-form-label font-weight-bold">Ảnh đại diện</label>
+            <div class="col-sm-10">
+                <input asp-for="AvatarFile" type="file" class="form-control" accept="image/*">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-10 offset-sm-2">
+                <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Tạo mới</button>
+                <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+            </div>
+        </div>
+    </form>
+</div>

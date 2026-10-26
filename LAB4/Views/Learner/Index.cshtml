@@ -1,0 +1,46 @@
+﻿@model IEnumerable<LAB4.Models.Learner>
+
+@{
+    ViewData["Title"] = "Learner List";
+    Layout = "~/Views/Shared/MyLayout.cshtml"; 
+}
+
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Learner List</h1>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <a asp-action="Create" class="btn btn-primary">Create New Student</a>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Mã</th>
+                        <th>Tên</th>
+                        <th>Họ</th>
+                        <th>Ngành</th>
+                        <th>Ngày Nhập Học</th>
+                        <th>Chức năng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var s in Model)
+                    {
+                        <tr>
+                            <td>@s.LearnerID</td>
+                            <td>@s.FirstMidName</td>
+                            <td>@s.LastName</td>
+                            <td>@(s.Major != null ? s.Major.MajorName : "Chưa có ngành")</td>
+                            <td>@s.EnrollmentDate.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@s.LearnerID">Edit</a> |
+                                <a asp-action="Delete" asp-route-id="@s.LearnerID">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
